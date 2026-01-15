@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-2xl font-bold mb-4">Pacientes</h1>
+    <h1 class="text-2xl font-bold mb-4 text-blue-600">Pacientes</h1>
 
     <Button
       variant="primary"

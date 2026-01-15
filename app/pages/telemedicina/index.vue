@@ -1,14 +1,22 @@
 <template>
-  <div>
-    <h1 class="text-2xl font-bold mb-4">Telemedicina</h1>
+  <div class="min-h-screen bg-gray-50 p-8">
+    <div class="mb-10">
+      <h1 class="text-3xl font-bold text-gray-800">
+        <span class="text-blue-600">Telemedicina</span>
+      </h1>
+      <p class="mt-2 text-gray-600">
+        Gerencie e acompanhe as teleconsultas em tempo real
+      </p>
+    </div>
 
     <Table :columns="columns" :data="teleconsultas">
       <template #status="{ row }">
         <span
+          class="px-3 py-1 rounded-full text-sm font-semibold"
           :class="{
-            'text-yellow-600': row.status === 'Agendada',
-            'text-blue-600': row.status === 'Em andamento',
-            'text-green-600': row.status === 'Finalizada'
+            'bg-yellow-100 text-yellow-700': row.status === 'Agendada',
+            'bg-blue-100 text-blue-700': row.status === 'Em andamento',
+            'bg-green-100 text-green-700': row.status === 'Finalizada'
           }"
         >
           {{ row.status }}
@@ -16,40 +24,50 @@
       </template>
 
       <template #acoes="{ row }">
-        <Button
-          v-if="row.status === 'Agendada'"
-          variant="primary"
-          @click="iniciarConsulta(row.id)"
-        >
-          Iniciar
-        </Button>
+        <div class="flex justify-center gap-2">
+          <Button
+            v-if="row.status === 'Agendada'"
+            variant="primary"
+            class="px-4 py-2"
+            @click="iniciarConsulta(row.id)"
+          >
+            Iniciar
+          </Button>
 
-        <Button
-          v-if="row.status === 'Em andamento'"
-          variant="secondary"
-          @click="abrirFinalizar(row.id)"
-        >
-          Finalizar
-        </Button>
+          <Button
+            v-if="row.status === 'Em andamento'"
+            variant="secondary"
+            class="px-4 py-2"
+            @click="abrirFinalizar(row.id)"
+          >
+            Finalizar
+          </Button>
+        </div>
       </template>
     </Table>
 
     <div
       v-if="consultaSelecionada !== null"
-      class="mt-6 p-4 bg-white rounded shadow max-w-md mx-auto"
+      class="mt-10 max-w-xl mx-auto bg-white rounded-3xl shadow-2xl p-8"
     >
-
-      <h2 class="font-bold mb-2 text-gray-800">Registrar Observações</h2>
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">
+        Registrar observações
+      </h2>
 
       <textarea
         v-model="observacoes"
-        class="w-full border rounded p-2 mb-3 text-gray-800"
-        placeholder="Descreva o atendimento..."
+        rows="4"
+        class="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-800
+               focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+               transition mb-6"
+        placeholder="Descreva o atendimento realizado..."
       />
 
-      <Button variant="primary" @click="finalizarConsulta">
-        Salvar Prontuário
-      </Button>
+      <div class="flex justify-end">
+        <Button variant="primary" class="px-6 py-3" @click="finalizarConsulta">
+          Salvar prontuário
+        </Button>
+      </div>
     </div>
 
     <ConfirmModal

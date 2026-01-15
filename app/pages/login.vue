@@ -1,30 +1,43 @@
 <template>
-  <div class="max-w-md mx-auto mt-20 p-6 bg-white rounded-2xl shadow-lg">
-    <h1 class="text-xl font-bold mb-4 text-gray-800">Olá, profissional da saúde!</h1>
+  <div class="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
 
-    <p class="mb-4 text-sm text-gray-600">
-      Selecione a área de acesso
-    </p>
+    <div class="bg-white w-full max-w-2xl p-10 rounded-3xl shadow-2xl">
+      
+      <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-800">
+          Olá, <span class="text-blue-600">profissional da saúde</span>!
+        </h1>
 
-    <div class="flex flex-col gap-3">
-      <Button variant="primary" @click="entrar('admin')">
-        Administradores
-      </Button>
+        <p class="mt-3 text-gray-600 text-lg">
+          Selecione a área de acesso
+        </p>
+      </div>
 
-      <Button variant="primary" @click="entrar('profissional')">
-        Profissionais
-      </Button>
+      <div class="bg-blue-50 border border-blue-100 rounded-2xl p-6 mb-8 text-center text-blue-700 text-sm">
+        Escolha seu perfil para acessar o sistema de forma segura e personalizada.
+      </div>
 
-      <Button variant="primary" @click="entrar('paciente')">
-        Pacientes
-      </Button>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <Button variant="primary" class="py-4 text-base" @click="entrar('admin')">
+          Administradores
+        </Button>
 
-       <Button variant="primary" @click="entrar('telemedicina')">
-        Telemedicina
-      </Button>
+        <Button variant="primary" class="py-4 text-base" @click="entrar('profissional')">
+          Profissionais
+        </Button>
+
+        <Button variant="primary" class="py-4 text-base" @click="entrar('paciente')">
+          Pacientes
+        </Button>
+
+        <Button variant="primary" class="py-4 text-base" @click="entrar('telemedicina')">
+          Telemedicina
+        </Button>
+      </div>
     </div>
   </div>
 </template>
+
 
 <script setup lang="ts">
 import Button from '~/components/Button.vue'

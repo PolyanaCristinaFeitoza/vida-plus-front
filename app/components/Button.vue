@@ -7,13 +7,15 @@
       disabled ? 'opacity-50 cursor-not-allowed' : ''
     ]"
     :disabled="disabled"
-    @click="$emit('click', $event)"
+   @click="$emit('click')"
   >
     <slot />
   </button>
 </template>
 
 <script setup lang="ts">
+const emit = defineEmits(['click'])
+
 interface Props {
   variant?: 'primary' | 'secondary'
   disabled?: boolean

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1 class="text-2xl font-bold mb-4">Profissionais de Saúde</h1>
+    <h1 class="text-3xl font-bold text-gray-800 mb-[10px]">
+      Profissionais de <span class="text-blue-600">Saúde</span>
+    </h1>
 
     <Button variant="primary" @click="router.push('/profissionais/novo')">
       Novo Profissional

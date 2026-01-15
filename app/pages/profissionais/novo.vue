@@ -1,22 +1,60 @@
 <template>
-  <div class="max-w-md mx-auto mt-6 p-4 bg-white rounded shadow">
-    <h1 class="text-xl font-bold mb-4 text-gray-800">Novo Profissional</h1>
+  <div class="min-h-screen bg-gray-50 flex items-start justify-center p-8">
+    <div class="w-full max-w-xl bg-white rounded-3xl shadow-2xl p-10">
+      <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-800">
+          Novo <span class="text-blue-600">Profissional</span>
+        </h1>
+        <p class="mt-2 text-gray-600">
+          Cadastre um novo profissional de saúde no sistema
+        </p>
+      </div>
 
-    <div class="flex flex-col gap-3 mb-4">
-      <label class="text-gray-800">
-        Nome
-        <input v-model="nome" class="w-full border px-2 py-1 rounded text-gray-400" />
-      </label>
+      <div class="flex flex-col gap-6 mb-10">
+        <div class="flex flex-col gap-2">
+          <label class="text-sm font-medium text-gray-700">
+            Nome do profissional
+          </label>
+          <input
+            v-model="nome"
+            placeholder="Ex: Maria Silva"
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-800
+                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                   transition"
+          />
+        </div>
 
-      <label class="text-gray-800">
-        Especialidade
-        <input v-model="especialidade" class="w-full border px-2 py-1 rounded text-gray-400" />
-      </label>
-    </div>
+        <div class="flex flex-col gap-2">
+          <label class="text-sm font-medium text-gray-700">
+            Especialidade
+          </label>
+          <input
+            v-model="especialidade"
+            placeholder="Ex: Cardiologia"
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-800
+                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                   transition"
+          />
+        </div>
+      </div>
 
-    <div class="flex gap-2">
-      <Button variant="primary" @click="salvar">Salvar</Button>
-      <Button variant="secondary" @click="cancelar">Cancelar</Button>
+      <div class="flex justify-end gap-4">
+        <Button
+          variant="secondary"
+          class="px-6 py-3"
+          @click="cancelar"
+        >
+          Cancelar
+        </Button>
+
+        <Button
+          variant="primary"
+          class="px-6 py-3"
+          @click="salvar"
+        >
+          Salvar
+        </Button>
+      </div>
     </div>
 
     <MessageModal
@@ -27,6 +65,7 @@
     />
   </div>
 </template>
+
 
 <script setup lang="ts">
 import { ref } from 'vue'

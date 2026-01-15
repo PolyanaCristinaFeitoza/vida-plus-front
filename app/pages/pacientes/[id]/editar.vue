@@ -1,47 +1,76 @@
 <template>
-  <div class="max-w-md mx-auto mt-6 p-4 bg-white rounded shadow">
-    <h1 class="text-xl font-bold mb-4 text-gray-800">
-      Editar Paciente
-    </h1>
+  <div class="min-h-screen bg-gray-50 flex items-start justify-center p-8">
 
-    <div class="flex flex-col gap-3 mb-4">
-      <label class="text-gray-800">
-        Nome
-        <input
-          type="text"
-          v-model="nome"
-          class="w-full border px-2 py-1 rounded text-gray-600"
-        />
-      </label>
+    <div class="w-full max-w-xl bg-white rounded-3xl shadow-2xl p-10">
 
-      <label class="text-gray-800">
-        Data de Nascimento
-        <input
-          type="date"
-          v-model="nascimento"
-          class="w-full border px-2 py-1 rounded text-gray-600"
-        />
-      </label>
+      <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-800">
+          Editar <span class="text-blue-600">Paciente</span>
+        </h1>
+        <p class="mt-2 text-gray-600">
+          Atualize as informações do paciente
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-6 mb-10">
+
+        <div class="flex flex-col gap-2">
+          <label class="text-sm font-medium text-gray-700">
+            Nome do paciente
+          </label>
+          <input
+            type="text"
+            v-model="nome"
+            placeholder="Ex: João da Silva"
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-800
+                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                   transition"
+          />
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label class="text-sm font-medium text-gray-700">
+            Data de nascimento
+          </label>
+          <input
+            type="date"
+            v-model="nascimento"
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-800
+                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                   transition"
+          />
+        </div>
+
+      </div>
+
+      <div class="flex justify-end gap-4">
+        <Button
+          variant="secondary"
+          class="px-6 py-3"
+          @click="cancelar"
+        >
+          Cancelar
+        </Button>
+
+        <Button
+          variant="primary"
+          class="px-6 py-3"
+          @click="salvar"
+        >
+          Salvar alterações
+        </Button>
+      </div>
     </div>
 
-    <div class="flex gap-2">
-      <Button variant="primary" @click="salvar">
-        Salvar
-      </Button>
-      <Button variant="secondary" @click="cancelar">
-        Cancelar
-      </Button>
-    </div>
+    <ConfirmModal
+      :open="modalOpen"
+      :title="modalTitle"
+      :message="modalMessage"
+      @confirm="confirmarModal"
+      @cancel="fecharModal"
+    />
+
   </div>
-
-  <!-- Modal -->
-  <ConfirmModal
-    :open="modalOpen"
-    :title="modalTitle"
-    :message="modalMessage"
-    @confirm="confirmarModal"
-    @cancel="fecharModal"
-  />
 </template>
 
 <script setup lang="ts">
@@ -58,7 +87,6 @@ const { pacientes, editar } = usePacientes()
 const nome = ref('')
 const nascimento = ref('')
 
-// controle do modal
 const modalOpen = ref(false)
 const modalTitle = ref('')
 const modalMessage = ref('')

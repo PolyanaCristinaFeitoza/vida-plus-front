@@ -1,43 +1,70 @@
 <template>
-  <div>
-    <h1 class="text-2xl font-bold mb-6">Administração Hospitalar</h1>
-
-    <div class="grid grid-cols-3 gap-4 mb-6">
-      <div class="p-4 bg-white rounded shadow">
-        <strong class="text-gray-800">Total de Leitos</strong>
-        <p class="text-xl text-gray-800">{{ totalLeitos }}</p>
-      </div>
-
-      <div class="p-4 bg-green-300 rounded shadow">
-        <strong class="text-gray-800">Disponíveis</strong>
-        <p class="text-xl text-gray-800">{{ disponiveis }}</p>
-      </div>
-
-      <div class="p-4 bg-red-300 rounded shadow">
-        <strong class="text-gray-800">Ocupados</strong>
-        <p class="text-xl text-gray-800">{{ ocupados }}</p>
-      </div>
+  <div class="min-h-screen bg-gray-50 p-8">
+    
+    <div class="mb-10">
+      <h1 class="text-3xl font-bold text-gray-800">
+        Administração <span class="text-blue-600">Hospitalar</span>
+      </h1>
+      <p class="mt-2 text-gray-600">
+        Visão geral da ocupação e gerenciamento de leitos
+      </p>
     </div>
 
-    <Table :columns="columns" :data="leitos">
-      <template #status="{ row }">
-        <span
-          :class="row.status === 'Disponível'
-            ? 'text-green-300 font-semibold'
-            : 'text-red-300 font-semibold'"
-        >
-          {{ row.status }}
-        </span>
-      </template>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      
+      <div class="bg-white p-6 rounded-3xl shadow-lg border border-gray-100">
+        <p class="text-[16px] text-gray-500">Total de Leitos</p>
+        <p class="mt-2 text-3xl font-bold text-gray-800">
+          {{ totalLeitos }}
+        </p>
+      </div>
 
-      <template #acoes="{ row }">
-        <Button variant="primary" @click="alterarStatus(row.id)">
-          Alterar Status
-        </Button>
-      </template>
-    </Table>
+      <div class="bg-blue-50 p-6 rounded-3xl shadow-lg border border-blue-100">
+        <p class="text-[16px] text-blue-700">Disponíveis</p>
+        <p class="mt-2 text-3xl font-bold text-blue-700">
+          {{ disponiveis }}
+        </p>
+      </div>
+
+      <div class="bg-red-50 p-6 rounded-3xl shadow-lg border border-red-100">
+        <p class="text-[16px] text-red-700">Ocupados</p>
+        <p class="mt-2 text-3xl font-bold text-red-700">
+          {{ ocupados }}
+        </p>
+      </div>
+
+    </div>
+
+    <div class="bg-white rounded-3xl shadow-xl border border-gray-100 p-6">
+      <Table :columns="columns" :data="leitos">
+        
+        <template #status="{ row }">
+          <span
+            class="px-3 py-1 rounded-full text-sm font-semibold"
+            :class="row.status === 'Disponível'
+              ? 'bg-green-100 text-green-700'
+              : 'bg-red-100 text-red-700'"
+          >
+            {{ row.status }}
+          </span>
+        </template>
+
+        <template #acoes="{ row }">
+          <Button
+            variant="primary"
+            class="px-4 py-2"
+            @click="alterarStatus(row.id)"
+          >
+            Alterar Status
+          </Button>
+        </template>
+
+      </Table>
+    </div>
+
   </div>
 </template>
+
 
 <script setup lang="ts">
 import Table from '/home/usuario/vida-plus-front/app/components/Table.vue'
